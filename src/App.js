@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import FeedbackOptions from './Components/FeedbackOptions/FeedbackOptions';
-import Container from './Components/Container/Container'
-import Statistics from './Components/Statistics/Statistics';
-import styles from './index.module.css'
+import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
+import Section from './components/Container/Section'
+import Statistics from './components/Statistics/Statistics';
+import './index.module.css'
 
 
 
@@ -38,13 +38,17 @@ class Feedback extends Component {
         return Math.round((this.state.good * 100 ) / this.countTotalFeedback())
     }
 
+    arrButton () {
+        return ['good', 'neutral', 'bad']
+    }
+
     render() {
-        const buttons = ['good', 'neutral', 'bad']
-        const {good, neutral, bad} = this.state
+        const { good, neutral, bad } = this.state
+        
         return (
-            <Container>
+            <Section title='Please leave feedback'>
                 <FeedbackOptions
-                   options={buttons}
+                   options={this.arrButton()}
                    onLeaveFeedback={this.handleChange}
                 />
 
@@ -55,7 +59,7 @@ class Feedback extends Component {
                     total={this.countTotalFeedback ()}
                     positivePercentage={this.countPositiveFeedbackPercentage ()}
                 />
-            </Container>
+            </Section>
         )
     }
 }
